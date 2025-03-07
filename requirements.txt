@@ -1,0 +1,11 @@
+traja
+alphashape
+pandas
+scipy
+pillow
+opencv-python
+moviepy
+imageio
+numpy
+shapely
+concave_hull
