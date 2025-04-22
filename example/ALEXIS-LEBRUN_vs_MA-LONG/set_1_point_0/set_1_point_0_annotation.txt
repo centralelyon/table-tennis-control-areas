@@ -1,0 +1,21 @@
+nom: le nom de la personne/équipe qui frappe
+debut: le début du coup en frame
+fin: la fin du coup en frame
+genre: homme/femme
+lateralite: coup_droit/revers
+set: le numéro du set
+système: le style de jeu des joueurs
+coup: le nom du joueur qui fait le coup
+type_service: le type du service
+zone_jeu: la zone de rebond (parmi les 9 zones de Christian)
+faute: le type de faute
+effet_coup: bloc/topspin/poussette/coupe
+coor_balle_x: coordonnées du rebond de la balle selon l'axe x
+coor_balle_y: coordonnées du rebond de la balle selon l'axe y
+coor_balle_z: coordonnées du rebond de la balle selon l'axe z
+joueur_frappe: le nom du joueur qui frappe la balle
+joueur_sur: le nom du joueur sur lequel la balle est frappée
+coor_frappe_x: coordonnées de l'endroit de la frappe sur la raquette selon l'axe x
+coor_frappe_y: coordonnées de l'endroit de la frappe sur la raquette selon l'axe y
+coor_frappe_z: coordonnées de l'endroit de la frappe sur la raquette selon l'axe z
+time_frappe: le moment où la frappe à lieu en frame

@@ -1,0 +1,68 @@
+{
+    "annotation": {
+        "base": "LOCAL-PIPELINE-TT",
+        "path": "annotation\\ALEXIS-LEBRUN_vs_MA-LONG"
+    },
+    "destPts": [
+        [
+            0,
+            0
+        ],
+        [
+            1280.0,
+            0
+        ],
+        [
+            1280.0,
+            720.0
+        ],
+        [
+            0,
+            720.0
+        ]
+    ],
+    "json_perspective_path": "",
+    "mediainfos": [],
+    "metadata": {
+        "competition": "ALEXIS-LEBRUN vs MA-LONG",
+        "date": "2024-03-10",
+        "playerA": "ALEXIS-LEBRUN",
+        "playerB": "MA-LONG",
+        "subCompetition": "set 1 point 0"
+    },
+    "preprocessing": {
+        "end_moment": "0:00:00.000",
+        "start_moment": "0:00:00.000"
+    },
+    "source": {
+        "args": "",
+        "command": "file-copy",
+        "path": "C:/Users/ReViVD/Desktop/dataroom/pipeline-tt\\2024_wtt_smash_singapour\\ALEXIS-LEBRUN_vs_MA-LONG\\clips\\set_1_point_0\\set_1_point_0.mp4",
+        "rotate": 0
+    },
+    "srcPts": [
+        [
+            "821.3333",
+            "363.55554"
+        ],
+        [
+            "845.9101",
+            "459.84137"
+        ],
+        [
+            "436.37192",
+            "456.6583"
+        ],
+        [
+            "466.52313",
+            "362.2512"
+        ]
+    ],
+    "tasks": [
+        {
+            "args": "..",
+            "command": "...",
+            "description": "Copying video"
+        }
+    ]
+}

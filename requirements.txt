@@ -9,3 +9,5 @@ imageio
 numpy
 shapely
 concave_hull
+matplotlib
+sqlite3

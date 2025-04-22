@@ -1,0 +1,68 @@
+{
+    "annotation": {
+        "base": "LOCAL-PIPELINE-TT",
+        "path": "annotation\\FAN-ZHENDONG_vs_TRULS-MOREGARD"
+    },
+    "destPts": [
+        [
+            0,
+            0
+        ],
+        [
+            768.0,
+            0
+        ],
+        [
+            768.0,
+            432.0
+        ],
+        [
+            0,
+            432.0
+        ]
+    ],
+    "json_perspective_path": "",
+    "mediainfos": [],
+    "metadata": {
+        "competition": "FAN-ZHENDONG vs TRULS-MOREGARD",
+        "date": "2025-03-11",
+        "playerA": "FAN-ZHENDONG",
+        "playerB": "TRULS-MOREGARD",
+        "subCompetition": "set 1 point 0"
+    },
+    "preprocessing": {
+        "end_moment": "0:00:00.000",
+        "start_moment": "0:00:00.000"
+    },
+    "source": {
+        "args": "",
+        "command": "file-copy",
+        "path": "G:/sauvegarde/ReViVD/Desktop/dataroom/pipeline-tt\\2024_JeuxOlympique_Paris\\FAN-ZHENDONG_vs_TRULS-MOREGARD\\clips\\set_1_point_0\\set_1_point_0.mp4",
+        "rotate": 0
+    },
+    "srcPts": [
+        [
+            "303.0",
+            "166.06"
+        ],
+        [
+            "479.0",
+            "166.06"
+        ],
+        [
+            "483.01",
+            "242.06"
+        ],
+        [
+            "293.81",
+            "241.0"
+        ]
+    ],
+    "tasks": [
+        {
+            "args": "..",
+            "command": "...",
+            "description": "Copying video"
+        }
+    ]
+}
