@@ -916,52 +916,27 @@ def supperposition2(chemin_image1,chemin_image2,chemin_enveloppe,pts_image1_tabl
 
 
 if __name__ == "__main__":
-    #renomer_fichier("E:/sauvegarde/2024_WttSmash_Singapour/ALEXIS-LEBRUN_vs_MA-LONG/clips/set_1_point_0/heatmap")
-    #mp4_to_gif("E:/sauvegarde/2024_WttSmash_Singapour/ALEXIS-LEBRUN_vs_MA-LONG/clips/set_1_point_0/set_1_point_0_pose.mp4", 
-    #           "E:/sauvegarde/2024_WttSmash_Singapour/ALEXIS-LEBRUN_vs_MA-LONG/clips/set_1_point_0/set_1_point_0_pose.gif", 
-    #           fps=25)
-
-    #cacul_zone_toutes_frame(os.path.join("E:/sauvegarde/2024_WttSmash_Singapour/ALEXIS-LEBRUN_vs_MA-LONG/clips/","set_1_point_5"),
-    #                            "ALEXIS-LEBRUN")
-
-
-
-    #liste_points = os.listdir(os.path.join("E:/sauvegarde/2024_WttSmash_Singapour/ALEXIS-LEBRUN_vs_MA-LONG/clips"))
-
-    #for point in liste_points:
-    #    cacul_zone_toutes_frame(os.path.join("E:/sauvegarde/2024_WttSmash_Singapour/ALEXIS-LEBRUN_vs_MA-LONG/clips/",point),
-    #                            "ALEXIS-LEBRUN")
-
-
-    #creer_video_to_image("E:/sauvegarde/2024_WttSmash_Singapour/ALEXIS-LEBRUN_vs_MA-LONG/clips/set_2_point_20")
-
-    """match = "ALEXIS-LEBRUN_vs_MA-LONG"
+    match = "ALEXIS-LEBRUN_vs_MA-LONG"
     point = "set_1_point_0"
     chemin_point = os.path.join(chemin_tt_espace,"example",match,point)
 
     dossier_image_modele = os.path.join(chemin_point,"heatmap")
-    i = 75
 
-    #ALEXIS-LEBRUN_vs_MA-LONG
     table = np.array([[821.33, 363.55], [845.91, 459.84], [436.37, 456.65], [466.52, 362.25]], dtype=np.float32)  # Points sur image1
     table_proj_sol = np.array([[807.0560241572812, 450.72322462289463], [850.8468941551321, 554.8325167532398], 
                             [454.57147485880085, 555.396836955502], [463.99038077237475, 448.45869007450403]], dtype=np.float32)
     pts_image2 = np.array([[324, 263], [476, 263], [476, 537], [324, 537]], dtype=np.float32)  
 
-    
+    creation_gif_zone_image_proj(chemin_point,dossier_image_modele,table,table_proj_sol,pts_image2)
 
-    #creation_gif_zone_image_proj(chemin_point,dossier_image_modele,table,table_proj_sol,pts_image2)
-
-    
-
-    # Paramètres de la caméra
+    # Camera params
     focale_mm = 38.45
     sensor_width_mm = 35
     img_width_px = 1280
     img_height_px = 720
     cx, cy = img_width_px / 2, img_height_px / 2
 
-    # Points 2D correspondants dans l'image
+    # 2D Points of table
     points_2d = np.array([
         [821.33, 363.55],
         [845.91, 459.84],
@@ -973,7 +948,7 @@ if __name__ == "__main__":
 
     image_size = (img_width_px, img_height_px)
 
-    # Calcul des paramètres de la caméra
+    # Compute camera params
     R, t, K = calculer_camera_params(points_2d, image_size)
     liste_points = []
     point_3D = np.array([-152/2, -274/2, 0])
@@ -990,164 +965,4 @@ if __name__ == "__main__":
     liste_points.append(point_2D)
     liste_points_triee = [liste_points[1],liste_points[2],liste_points[3],liste_points[0]]
 
-    #creer_video_to_image(chemin_point)
-    projeter_courbe_toutes_les_frames(chemin_point, R, t, K)"""
-
-
-
-    #FAN-ZHENDONG_vs_TRULS-MOREGARD
-    match = "FAN-ZHENDONG_vs_TRULS-MOREGARD"
-    table = np.array([[303.01, 432-266.06], 
-        [477.90, 432-264.98], 
-        [484.05,432-189.15], 
-        [293.96,432-190.25]], dtype=np.float32)  # Points sur image1
-
-    focale_mm = 169.94
-    sensor_width_mm = 35
-    img_width_px = 768
-    img_height_px = 432
-    cx, cy = img_width_px / 2, img_height_px / 2
-
-    # Points 2D correspondants dans l'image
-    points_2d = np.array([
-        [303.01, 432-266.06], 
-        [477.90, 432-264.98], 
-        [484.05,432-189.15], 
-        [293.96,432-190.25],
-        [481.13, 432-229.19],
-        [298.96, 432-229.90]
-    ], dtype=np.float32).reshape(-1, 1, 2)
-
-    image_size = (img_width_px, img_height_px)
-
-    # Calcul des paramètres de la caméra
-    R, t, K = calculer_camera_params(points_2d, image_size)
-    liste_points = []
-    point_3D = np.array([-152/2, -274/2, 0])
-    point_2D = project_3d_to_2d(K, R, t, point_3D)
-    liste_points.append(point_2D)
-    point_3D = np.array([-152/2, 274/2, 0])
-    point_2D = project_3d_to_2d(K, R, t, point_3D)
-    liste_points.append(point_2D)
-    point_3D = np.array([152/2, 274/2, 0])
-    point_2D = project_3d_to_2d(K, R, t, point_3D)
-    liste_points.append(point_2D)
-    point_3D = np.array([152/2, -274/2, 0])
-    point_2D = project_3d_to_2d(K, R, t, point_3D)
-    liste_points.append(point_2D)
-    liste_points_triee = [liste_points[1],liste_points[2],liste_points[3],liste_points[0]]
-
-
-
-    table_proj_sol = np.array(liste_points_triee, dtype=np.float32)
-    pts_image2 = np.array([[324, 263], [476, 263], [476, 537], [324, 537]], dtype=np.float32)  
-
-    point = "set_1_point_0"
-    chemin_point = os.path.join(chemin_tt_espace,"example",match,point)
-
-    dossier_image_modele = os.path.join(chemin_point,"heatmap")
-
-    creation_gif_zone_image_proj(chemin_point,dossier_image_modele,table,table_proj_sol,pts_image2)
     projeter_courbe_toutes_les_frames(chemin_point, R, t, K)
-
-
-
-    deze
-    #dezdez
-    #mp4_to_gif("E:/sauvegarde/2024_WttSmash_Singapour/ALEXIS-LEBRUN_vs_MA-LONG/clips/set_1_point_0/set_1_point_0_video_avec_model.mp4", 
-    #           "E:/sauvegarde/2024_WttSmash_Singapour/ALEXIS-LEBRUN_vs_MA-LONG/clips/set_1_point_0/set_1_point_0_video_avec_model.gif", 
-    #           fps=25)
-
-    #edzdez
-
-
-    table = np.array([[821.33, 363.55], [845.91, 459.84], [436.37, 456.65], [466.52, 362.25]], dtype=np.float32)  # Points sur image1
-    table_proj_sol = np.array([[807.0560241572812, 450.72322462289463], [850.8468941551321, 554.8325167532398], 
-                            [454.57147485880085, 555.396836955502], [463.99038077237475, 448.45869007450403]], dtype=np.float32)
-
-    pts_image2 = np.array([[324, 263], [476, 263], [476, 537], [324, 537]], dtype=np.float32) 
-    pts_image2 = np.array([[400-152/2, 400-274/2], [400+152/2, 400-274/2], [400+152/2, 400+274/2], [400-152/2, 400+274/2]], dtype=np.float32) 
-
-
-    #perspective_image("C:/Users/ReViVD/Downloads/frappe_rapport_table.jpg", pts_image2, table_proj_sol, "C:/Users/ReViVD/Downloads/frappe_rapport_joueur_pivote.jpg")
-    """
-    # Paramètres de la caméra
-    focale_mm = 95.97
-    sensor_width_mm = 35
-    img_width_px = 1280
-    img_height_px = 720
-    cx, cy = img_width_px / 2, img_height_px / 2
-
-    # Points 2D correspondants dans l'image
-    points_2d = np.array([
-        [547.24, 329.73],
-        [739.09, 329.64],
-        [747.41, 438.52],
-        [536.63, 438.57],
-        [741.98, 720-338.33],
-        [543.03, 720-339.12]
-    ], dtype=np.float32).reshape(-1, 1, 2)
-
-    image_size = (img_width_px, img_height_px)
-
-    # Calcul des paramètres de la caméra
-    R, t, K = calculer_camera_params(points_2d, image_size)
-    chemin_point = os.path.join("C:/Users/ReViVD/Desktop/dataroom/pipeline-tt/2021_ChEuropeF_ClujNapoca/PRITHIKA-PAVADE_vs_SIBEL-ALTINKAYA/clips/set_1_point_12")
-    #creer_video_to_image(chemin_point)
-    projeter_courbe_toutes_les_frames(chemin_point, R, t, K)
-    """
-
-    
-
-    """image_path = os.path.join("C:/Users/ReViVD/Desktop/dataroom/pipeline-tt/2024_WttSmash_Singapour/ALEXIS-LEBRUN_vs_MA-LONG/ALEXIS-LEBRUN_vs_MA-LONG.jpg")
-    output_path = os.path.join("E:/sauvegarde/2024_WttSmash_Singapour/ALEXIS-LEBRUN_vs_MA-LONG/clips/set_1_point_0/test_traj.jpg")
-    csv_path = os.path.join("E:/sauvegarde/2024_WttSmash_Singapour/ALEXIS-LEBRUN_vs_MA-LONG/clips/set_1_point_0",
-                            "csv_json_openpose/set_1_point_0_zone_joueur_avec_pos_balle_3D.csv")"""
-
-
-
-
-    liste_points = []
-
-    point_3D = np.array([-152/2, -274/2, 0])
-    point_2D = project_3d_to_2d(K, R, t, point_3D)
-    liste_points.append(point_2D)
-    point_3D = np.array([-152/2, 274/2, 0])
-    point_2D = project_3d_to_2d(K, R, t, point_3D)
-    liste_points.append(point_2D)
-    point_3D = np.array([152/2, 274/2, 0])
-    point_2D = project_3d_to_2d(K, R, t, point_3D)
-    liste_points.append(point_2D)
-    point_3D = np.array([152/2, -274/2, 0])
-    point_2D = project_3d_to_2d(K, R, t, point_3D)
-    liste_points.append(point_2D)
-    liste_points_triee = [liste_points[1],liste_points[2],liste_points[3],liste_points[0]]
-
-
-    #liste_points_table_projetee = [(463.99038077237475, 448.45869007450403), (807.0560241572812, 450.72322462289463), 
-    #                               (850.8468941551321, 554.8325167532398), (454.57147485880085, 555.396836955502)]
-    #draw_points_on_image("set_2_point_31_image.jpg", liste_points_triee, "test_affichage_sol.jpg", point_color=(0, 255, 0), point_radius=5)
-    table = np.array([[821.33, 363.55], [845.91, 459.84], [436.37, 456.65], [466.52, 362.25]], dtype=np.float32)  # Points sur image1
-    table_proj_sol = np.array([[807.0560241572812, 450.72322462289463], [850.8468941551321, 554.8325167532398], 
-                            [454.57147485880085, 555.396836955502], [463.99038077237475, 448.45869007450403]], dtype=np.float32)
-    pts_image2 = np.array([[324, 263], [476, 263], [476, 537], [324, 537]], dtype=np.float32)  # Points sur image2
-
-    #supperposition("C:/Users/ReViVD/Documents/GitHub/tt-espace/set_2_point_31_image.jpg","C:/Users/ReViVD/Documents/GitHub/tt-espace/image_21.png",
-    #               table,table_proj_sol,pts_image2,
-    #               "C:/Users/ReViVD/Documents/GitHub/tt-espace/image_superposee_proj_sol.png")
-    # Exemple d'utilisation
-
-    fusionner_images("image_superposee_proj_sol.png", "test2.jpg", "set_2_point_31_image.jpg", "image_fusionnee.jpg", seuil_noir=20)
-
-
-
-
-    #compute_average_frame("E:/sauvegarde/2024_WttSmash_Singapour/ALEXIS-LEBRUN_vs_MA-LONG/clips/set_2_point_31/set_2_point_31.mp4", 
-    #                      save_path="C:/Users/ReViVD/Documents/GitHub/tt-espace/test.jpg")
-
-    #compute_median_frame("E:/sauvegarde/2024_WttSmash_Singapour/ALEXIS-LEBRUN_vs_MA-LONG/clips/set_2_point_31/set_2_point_31.mp4", 
-    #                      save_path="C:/Users/ReViVD/Documents/GitHub/tt-espace/test.jpg")
-
-    #subtract_images("set_2_point_31_image.jpg","test.jpg",save_path="C:/Users/ReViVD/Documents/GitHub/tt-espace/test2.jpg")
-
-
