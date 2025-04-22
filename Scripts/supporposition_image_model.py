@@ -709,7 +709,7 @@ def projeter_courbe(image_path, output_path, csv_path, num_frame, R, t, K):
     hauteur, largeur, _ = image.shape  # Récupérer la taille de l'image
 
     df = pd.read_csv(csv_path)  # Charger le fichier CSV
-    df = df[(df['numero_pers'] == 4) & (df['frame'] <= num_frame+6)]
+    df = df[(df['numero_pers'] == 4) & (df['frame'] <= num_frame)]
     #df['distance_x'] *= -1
     df['distance_y'] *= -1
     df['distance_z'] += 76
@@ -728,49 +728,10 @@ def projeter_courbe(image_path, output_path, csv_path, num_frame, R, t, K):
 
 
     color = (0,0,255)  
-    thickness = 2
-
-    # Paramètres pour le pointillé
-    dash_length = 10  # Longueur de chaque segment
-    gap_length = 10  # Espacement entre les segments
-
-    # Calculer le vecteur direction
-    """for i in range(valeur_num_prece,valeur_num-1):
-        pt1 = tuple(points_2D[i].astype(int))
-        pt2 = tuple(points_2D[i+1].astype(int))
-        num_dashes = int(np.linalg.norm(np.array(pt2) - np.array(pt1)) // (dash_length + gap_length))
-        if 0 <= pt1[0] < largeur and 0 <= pt1[1] < hauteur and 0 <= pt2[0] < largeur and 0 <= pt2[1] < hauteur:
-            cv2.line(image, pt1, pt2, color  , 2)  
-            for i in range(num_dashes):
-                start = (
-                    int(pt1[0] + (pt2[0] - pt1[0]) * (i / num_dashes)),
-                    int(pt1[1] + (pt2[1] - pt1[1]) * (i / num_dashes))
-                )
-                end = (
-                    int(pt1[0] + (pt2[0] - pt1[0]) * ((i + 0.5) / num_dashes)),
-                    int(pt1[1] + (pt2[1] - pt1[1]) * ((i + 0.5) / num_dashes))
-                )
-                cv2.line(image, start, end, color, thickness)"""
-
-
-    # 6. Dessiner la courbe sur l’image
-    """for i in range(valeur_num,len(points_2D) - 1-4):
-        pt1 = tuple(points_2D[i].astype(int))
-        pt2 = tuple(points_2D[i+1].astype(int))
-        if 0 <= pt1[0] < largeur and 0 <= pt1[1] < hauteur and 0 <= pt2[0] < largeur and 0 <= pt2[1] < hauteur:
-            cv2.line(image, pt1, pt2, (208,224,64)  , 2)  """
-
-    
-    """# 6. Dessiner la courbe sur l’image
-    for i in range(len(points_2D) - 1-4,len(points_2D) - 1):
-        pt1 = tuple(points_2D[i].astype(int))
-        pt2 = tuple(points_2D[i+1].astype(int))
-        if 0 <= pt1[0] < largeur and 0 <= pt1[1] < hauteur and 0 <= pt2[0] < largeur and 0 <= pt2[1] < hauteur:
-            cv2.line(image, pt1, pt2, color  , 2)  """
     
     
     # 6. Dessiner la courbe sur l’image
-    for i in range(valeur_num+2,len(points_2D) - 1):
+    for i in range(valeur_num,len(points_2D) - 1):
         pt1 = tuple(points_2D[i].astype(int))
         pt2 = tuple(points_2D[i+1].astype(int))
         if 0 <= pt1[0] < largeur and 0 <= pt1[1] < hauteur and 0 <= pt2[0] < largeur and 0 <= pt2[1] < hauteur:
@@ -834,84 +795,6 @@ def perspective_image(chemin_image1, pts_image2, table_proj_sol, output_path):
     h, w, _ = image1.shape
     image1_warped = cv2.warpPerspective(image1, H, (1280, 720))
     cv2.imwrite(output_path, image1_warped)
-
-
-
-
-def supperposition2(chemin_image1,chemin_image2,chemin_enveloppe,pts_image1_table,pts_image1_table_proj,pts_image2,chemin_sauvegarde,faire_enveloppe):
-    """
-        Fonction qui fait supperposition entre deux image en plaçant en fonction de la position de la table
-    """
-    # 1️⃣ Charger les images
-    image2 = cv2.imread(chemin_image2)  # Image à transformer
-    image2_intermediaire = Image.open(chemin_image1).convert("RGBA")
-    image1 = np.full_like(np.array(image2_intermediaire), [255, 255, 255, 255], dtype=np.uint8)# Image de base
-    
-    
-    # Copier uniquement la région [263:537, 324:476] depuis l'image originale
-    
-
-    # Convertir en format PIL pour gérer la transparence
-    image1_pil = Image.fromarray(image1)
-
-
-    # 3️⃣ Calculer la matrice d’homographie
-    H, _ = cv2.findHomography(pts_image2, pts_image1_table_proj, cv2.RANSAC)
-
-    h, w, _ = image1.shape
-    image2_warped = cv2.warpPerspective(image2, H, (w, h))
-
-    """# Définir les 6 points du polygone
-    points = np.array([[pts_image1_table[0][0], pts_image1_table[0][1]], [pts_image1_table[1][0], pts_image1_table[1][1]],  
-                       [pts_image1_table[2][0], pts_image1_table[2][1]], [pts_image1_table[3][0], pts_image1_table[3][1]]], np.int32)
-    # Créer un masque noir (même taille que l'image, mais en niveaux de gris)
-    masque = np.zeros(image2_warped.shape[:2], dtype=np.uint8)
-    # Dessiner un polygone blanc sur le masque
-    cv2.fillPoly(masque, [points], 255)
-    # Appliquer le masque : rendre les pixels blancs là où le masque est blanc
-    image2_warped[masque == 255] = [255, 255, 255]
-    
-    points = np.array([[pts_image1_table_proj[0][0], pts_image1_table_proj[0][1]], [pts_image1_table_proj[1][0], pts_image1_table_proj[1][1]],  
-                       [pts_image1_table_proj[2][0], pts_image1_table_proj[2][1]], [pts_image1_table_proj[3][0], pts_image1_table_proj[3][1]]], np.int32)
-    # Créer un masque noir (même taille que l'image, mais en niveaux de gris)
-    masque = np.zeros(image2_warped.shape[:2], dtype=np.uint8)
-    # Dessiner un polygone blanc sur le masque
-    cv2.fillPoly(masque, [points], 255)
-    # Appliquer le masque : rendre les pixels blancs là où le masque est blanc
-    image2_warped[masque == 255] = [255, 255, 255]    """    
-
-
-    # Convertir en format PIL
-    image2_warped_pil = Image.fromarray(cv2.cvtColor(image2_warped, cv2.COLOR_BGR2RGBA))
-
-    
-
-    # 5️⃣ Rendre le blanc transparent et appliquer la transparence
-    image2_data = np.array(image2_warped_pil)
-    r, g, b, a = image2_data[:, :, 0], image2_data[:, :, 1], image2_data[:, :, 2], image2_data[:, :, 3]
-    mask = (r > 254) & (g > 254) & (b > 254)  # Détecte le blanc
-    image2_data[mask] = [0, 0, 0, 0]  # Rendre transparent
-    
-
-    # 🔹 Appliquer une transparence de 50%
-    image2_data[:, :, 3] = (image2_data[:, :, 3] * 1).astype(np.uint8)
-
-    image2_transparent = Image.fromarray(image2_data)
-
-    
-
-    # 6️⃣ Superposition des images
-    image1_pil.paste(image2_transparent, (0, 0), image2_transparent)
-
-
-
-
-
-
-    # 7️⃣ Sauvegarder et afficher le résultat
-    image1_pil.save(chemin_sauvegarde)
-    #image1_pil.show()
-
 
 
 
