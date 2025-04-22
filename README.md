@@ -66,9 +66,9 @@ The process is as follows:
 1. Compute heatmaps (Done in part 3)
 2. Make homography of heatmaps using table position as a reference
 3. Fuses heatmap and image
-3. a. Separate the heatmap part above the table from the part on the ground
-4. Compute the median image of the point
-5. Subtract players
+    a. Separate the heatmap part above the table from the part on the ground
+5. Compute the median image of the point
+6. Subtract players
 
 
 <img src="images/supperposition_image_model/heatmap_image_explain.png" alt="" width="500">  
