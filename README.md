@@ -29,7 +29,7 @@ We provide code to explore statistics of players' strokes and a code to create a
 - Rename config-sample.py to config.py
 
 ## 2. 1_stats_from_data.ipynb
-
+This Notebook explores strike positions  
 - Run all [1_stats_from_data](https://github.com/centralelyon/table-tennis-control-areas/blob/main/Notebooks/1_stats_from_data.ipynb) notebook  
 
 First part of the notebook shows visual statistics of strike positions:
@@ -48,7 +48,7 @@ In this second part, envelope csv files are created to be used by models
 
 
 ## 3. time_calc_inertia.ipynb 
-This [Notebook](https://github.com/centralelyon/table-tennis-control-areas/blob/main/Notebooks/time_calc_inertia.ipynb) is used to create heatmaps of reachables areas.
+This [Notebook](https://github.com/centralelyon/table-tennis-control-areas/blob/main/Notebooks/time_calc_inertia.ipynb) create heatmaps of reachables areas.
 
 - First model uses Newton's Law. It computes for each point of the area how much it takes to reach it by players. Then we created heatmaps to translate these times
 - - - Location: `example/{match}/{point}/heatmap`
