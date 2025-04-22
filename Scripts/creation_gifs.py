@@ -7,7 +7,7 @@ import os
 import imageio.v2 as iio
 from PIL import Image, ImageDraw
 
-from config import chemin_pipeline, chemin_tt_espace
+from config import chemin_tt_espace
 
 from Scripts.fonctions_inertie import heatmap
 from Scripts.fonctions_positions import coordonnees, angles_avant_bras, ajout_vecteurs_trajectoires, banane_alexis, banane_alexis_cd_r

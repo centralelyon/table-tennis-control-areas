@@ -11,7 +11,7 @@ from shapely.geometry import Polygon, MultiPolygon, Point
 from scipy.interpolate import splprep, splev
 from math import sqrt
 
-from config import chemin_pipeline, chemin_tt_espace
+from config import chemin_tt_espace
 
 from Scripts.fonctions_time import time_to_point, frappe
 
